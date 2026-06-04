@@ -63,7 +63,6 @@ export default function CRMPage({ params }: { params: Promise<{ escolaId: string
                 key={col.id}
                 id={col.id}
                 title={col.title}
-                color={col.color}
                 leads={leads.filter(l => l.status === col.id)}
               />
             ))}

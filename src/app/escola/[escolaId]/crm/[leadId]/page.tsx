@@ -23,7 +23,7 @@ export default function LeadDetailPage({
   const contract = mockContracts.find((c) => c.leadId === leadId);
 
   // Inicializando estado para simular a baixa interativa das parcelas
-  const isFechado = contract?.status === 'assinado' || lead?.status === 'matriculado';
+  const isFechado = contract?.status === 'assinado' || lead?.status === 'fechado';
   
   const [parcelas, setParcelas] = useState([
     { num: 1, valor: 300.00, vencimento: '10/07/2026', status: 'pendente' },
