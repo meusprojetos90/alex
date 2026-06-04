@@ -66,6 +66,7 @@ export interface Contract {
   autentiqueId?: string;
   status: StatusContrato;
   linkAssinatura?: string;
+  valor: number;
   dadosCliente: Record<string, string | number>;
   assinadoEm?: string;
   criadoEm: string;

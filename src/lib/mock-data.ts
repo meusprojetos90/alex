@@ -46,6 +46,7 @@ export const mockContracts: Contract[] = Array.from({ length: 8 }).map((_, i) =>
     leadId: `lead_${i + 1}`,
     tenantId: "tenant_1", // majority on tenant 1 for preview
     status: statuses[i % statuses.length],
+    valor: 1500 + i * 100,
     dadosCliente: { nome: `Lead ${i + 1} Silva`, cpf: `123.456.789-0${i}` },
     criadoEm: new Date(Date.now() - i * 86400000).toISOString(),
     assinadoEm: i % 4 === 2 ? new Date().toISOString() : undefined,
