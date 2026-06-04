@@ -213,8 +213,8 @@ export default function LeadDetailPage({
 
                   {contract.linkAssinatura && (
                     <div className="pt-2">
-                      <Button className="w-full rounded-xl bg-purple-600 hover:bg-purple-700 text-white" asChild>
-                        <a href={contract.linkAssinatura} target="_blank">Abrir PDF do Contrato</a>
+                      <Button className="w-full rounded-xl bg-purple-600 hover:bg-purple-700 text-white" render={<a href={contract.linkAssinatura} target="_blank" />}>
+                        Abrir PDF do Contrato
                       </Button>
                     </div>
                   )}

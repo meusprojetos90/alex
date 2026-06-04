@@ -29,10 +29,8 @@ export default function AdminAutoescolasPage() {
         </div>
         
         <Dialog>
-          <DialogTrigger asChild>
-            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl">
-              <Plus size={16} className="mr-2" /> Nova Autoescola
-            </Button>
+          <DialogTrigger render={<Button className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl" />}>
+            <Plus size={16} className="mr-2" /> Nova Autoescola
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px] bg-background border-black/10 dark:border-white/10 rounded-3xl">
             <DialogHeader>
@@ -124,10 +122,8 @@ export default function AdminAutoescolasPage() {
                   </td>
                   <td className="px-6 py-4 text-right flex justify-end gap-2">
                     <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="ghost" size="sm" onClick={() => setSelectedEscola(escola)} className="h-8 rounded-lg text-zinc-500 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5">
-                          <Settings size={14} className="mr-1.5" /> Editar
-                        </Button>
+                      <DialogTrigger render={<Button variant="ghost" size="sm" onClick={() => setSelectedEscola(escola)} className="h-8 rounded-lg text-zinc-500 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5" />}>
+                        <Settings size={14} className="mr-1.5" /> Editar
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[425px] bg-background border-black/10 dark:border-white/10 rounded-3xl text-left">
                         <DialogHeader>
