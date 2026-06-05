@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Phone, Mail, Clock, ArrowLeft, Send, CheckCircle2, DollarSign, Calendar, CreditCard, Banknote, FileText, FileSignature } from "lucide-react";
+import { Phone, Mail, Clock, ArrowLeft, Send, CheckCircle2, DollarSign, Calendar, CreditCard, Banknote, FileText, FileSignature, Tag, User, Hourglass } from "lucide-react";
 import Link from "next/link";
 
 export default function LeadDetailPage({
@@ -106,23 +106,71 @@ export default function LeadDetailPage({
                     <Calendar size={14} className="text-emerald-500" />
                   </div>
                   <div>
-                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Capturado Em</p>
-                    <p className="text-sm font-medium text-foreground">{new Date(lead.criadoEm).toLocaleDateString('pt-BR')}</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Data Início</p>
+                    <p className="text-sm font-medium text-foreground">{new Date(lead.dataInicio || lead.criadoEm).toLocaleDateString('pt-BR')}</p>
                   </div>
                 </div>
+
+                {lead.campanha && (
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0">
+                      <Tag size={14} className="text-orange-500" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Campanha</p>
+                      <p className="text-sm font-medium text-foreground">{lead.campanha}</p>
+                    </div>
+                  </div>
+                )}
+
+                {lead.vendedor && (
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-zinc-500/10 flex items-center justify-center shrink-0">
+                      <User size={14} className="text-zinc-500 dark:text-zinc-400" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Vendedor</p>
+                      <p className="text-sm font-medium text-foreground">{lead.vendedor}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
 
           <Card className="border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/[0.02] backdrop-blur-3xl shadow-lg rounded-3xl">
             <CardHeader className="pb-4">
-              <CardTitle className="text-sm">Interesse Principal</CardTitle>
+              <CardTitle className="text-sm">Jornada do Lead</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-center">
-                <p className="text-xs text-indigo-400 font-medium uppercase tracking-wider mb-1">Categoria Desejada</p>
-                <p className="text-2xl font-black text-indigo-500">Tipo {lead.categoriaInteresse}</p>
-              </div>
+              {lead.historicoEtapas && lead.historicoEtapas.length > 0 ? (
+                <div className="space-y-4 relative before:absolute before:inset-0 before:ml-4 before:-translate-x-px before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-black/10 dark:before:via-white/10 before:to-transparent">
+                  {lead.historicoEtapas.map((etapa, idx) => {
+                    const etapaConfig = LEAD_STATUS[etapa.status];
+                    // Calculando tempo na etapa apenas para exibição mock
+                    const dataEntrada = new Date(etapa.dataEntrada);
+                    const proximaEtapaData = lead.historicoEtapas![idx + 1] ? new Date(lead.historicoEtapas![idx + 1].dataEntrada) : new Date();
+                    const horasNaEtapa = Math.max(1, Math.round((proximaEtapaData.getTime() - dataEntrada.getTime()) / (1000 * 60 * 60)));
+                    
+                    return (
+                      <div key={idx} className="relative flex items-start gap-4">
+                        <div className="absolute left-4 -translate-x-1/2 w-2 h-2 rounded-full bg-blue-500 mt-2 ring-4 ring-background"></div>
+                        <div className="pl-8 flex-1">
+                          <p className="text-xs font-bold text-foreground">{etapaConfig.label}</p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[10px] text-muted-foreground">{dataEntrada.toLocaleString('pt-BR')}</span>
+                            <span className="text-[9px] flex items-center bg-black/5 dark:bg-white/5 px-2 py-0.5 rounded border border-black/5 dark:border-white/5 text-zinc-500">
+                              <Hourglass size={10} className="mr-1" /> {horasNaEtapa}h nesta etapa
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-xs text-muted-foreground text-center">Nenhum histórico registrado.</p>
+              )}
             </CardContent>
           </Card>
         </div>

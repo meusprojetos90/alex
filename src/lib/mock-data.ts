@@ -24,6 +24,10 @@ export const mockLeads: Lead[] = Array.from({ length: 20 }).map((_, i) => {
   const tenantIds = ["tenant_1", "tenant_2", "tenant_3"];
   const statuses = ['novo', 'qualificado', 'proposta', 'aguardando', 'fechado', 'perdido'] as const;
   const cats = ['A', 'B', 'AB', 'D'] as const;
+  const dates = [
+    new Date(Date.now() - i * 86400000).toISOString(),
+    new Date(Date.now() - i * 86400000 + 3600000).toISOString()
+  ];
   
   return {
     id: `lead_${i + 1}`,
@@ -33,9 +37,17 @@ export const mockLeads: Lead[] = Array.from({ length: 20 }).map((_, i) => {
     email: `lead${i+1}@teste.com`,
     status: statuses[i % statuses.length],
     categoriaInteresse: cats[i % cats.length],
-    criadoEm: new Date(Date.now() - i * 86400000).toISOString(),
+    criadoEm: dates[0],
     atualizadoEm: new Date().toISOString(),
     diasNoStatus: i % 5,
+    dataInicio: dates[0],
+    campanha: i % 2 === 0 ? 'Meta Ads - Lançamento' : 'Google - Pesquisa',
+    vendedor: i % 3 === 0 ? 'Carlos' : 'Ana',
+    whaticketUrl: `https://whaticket.autoescola.com.br/chat/119888800${i < 10 ? '0' + i : i}`,
+    historicoEtapas: [
+      { status: 'novo', dataEntrada: dates[0] },
+      { status: statuses[i % statuses.length], dataEntrada: dates[1] }
+    ]
   };
 });
 
@@ -73,7 +85,7 @@ export const mockKnowledgeBase: KnowledgeBase[] = [
 
 export const mockPricing: PricingCategory[] = [
   { id: "p_1", tenantId: "tenant_1", categoria: "A", valor: 1200, descricao: "Moto", incluso: ["Exames", "Aulas"], prazoEstimado: "60 dias", ativo: true },
-  { id: "p_2", tenantId: "tenant_1", categoria: "B", valor: 1500, descricao: "Carro", incluso: ["Exames", "Aulas", "Simulador"], prazoEstimado: "90 dias", ativo: true },
+  { id: "p_2", tenantId: "tenant_1", categoria: "B", valor: 1500, valorPromocional: 1200, emPromocao: true, descricao: "Carro", incluso: ["Exames", "Aulas", "Simulador"], prazoEstimado: "90 dias", ativo: true },
   { id: "p_3", tenantId: "tenant_1", categoria: "AB", valor: 2500, descricao: "Carro e Moto", incluso: ["Exames", "Aulas"], prazoEstimado: "120 dias", ativo: true }
 ];
 

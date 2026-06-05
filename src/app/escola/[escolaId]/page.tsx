@@ -193,25 +193,39 @@ export default function DashboardPage({ params }: { params: Promise<{ escolaId: 
         </Card>
 
         {/* WhatsApp Status */}
-        <Card className="border-black/5 dark:border-white/10 bg-emerald-50 dark:bg-emerald-950/20 backdrop-blur-3xl shadow-lg rounded-3xl border-emerald-500/20">
+        <Card className="border-black/5 dark:border-white/10 bg-emerald-50/50 dark:bg-emerald-950/10 backdrop-blur-3xl shadow-lg rounded-3xl border-emerald-500/20 flex flex-col">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium flex items-center justify-between text-emerald-700 dark:text-emerald-400">
-              Conexão WhatsApp
+              Instâncias WhatsApp
               <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
                 <MessageCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
               </div>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-              </span>
-              <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">Conectado</div>
-            </div>
-            <div className="mt-3">
-              <Button variant="outline" size="sm" className="h-7 text-xs border-emerald-500/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 w-full rounded-xl">Reconectar Aparelho</Button>
+          <CardContent className="flex-1 flex flex-col gap-3">
+            {[
+              { id: 1, nome: "Atendimento 1", status: "conectado" },
+              { id: 2, nome: "Vendas 1", status: "conectado" },
+            ].map(inst => (
+              <div key={inst.id} className="flex items-center justify-between bg-white/50 dark:bg-black/20 p-2.5 rounded-2xl border border-emerald-500/10">
+                <div className="flex items-center gap-2.5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <div>
+                    <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400">{inst.nome}</div>
+                    <div className="text-[10px] text-emerald-600/70 dark:text-emerald-400/70 uppercase font-medium">Conectado</div>
+                  </div>
+                </div>
+                <Button variant="ghost" size="sm" className="h-6 px-2 text-[10px] text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 rounded-lg">Reconectar</Button>
+              </div>
+            ))}
+            
+            <div className="mt-auto pt-1">
+              <Button variant="outline" size="sm" className="h-8 text-xs border-dashed border-emerald-500/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 w-full rounded-xl">
+                + Nova Instância (2/4)
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -27,7 +27,7 @@ export default function AIPoolPage({ params }: { params: Promise<{ escolaId: str
         <p className="text-muted-foreground mt-1">Acompanhe as conversas do robô em tempo real. Assuma o controle quando quiser.</p>
       </div>
 
-      <Card className="flex-1 border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/[0.02] backdrop-blur-3xl shadow-xl rounded-3xl overflow-hidden flex">
+      <div className="flex-1 border border-black/5 dark:border-white/10 bg-white/40 dark:bg-white/[0.02] backdrop-blur-3xl shadow-xl rounded-3xl overflow-hidden flex flex-row">
         
         {/* Sidebar Esquerda - Lista de Chats */}
         <div className="w-80 border-r border-black/5 dark:border-white/10 flex flex-col bg-background/50">
@@ -146,7 +146,7 @@ export default function AIPoolPage({ params }: { params: Promise<{ escolaId: str
           </div>
         </div>
 
-      </Card>
+      </div>
     </div>
   );
 }

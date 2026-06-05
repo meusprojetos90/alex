@@ -28,47 +28,11 @@ export default function AdminAutoescolasPage() {
           <p className="text-muted-foreground mt-2">Configure o acesso e a comissão por contrato de cada cliente.</p>
         </div>
         
-        <Dialog>
-          <DialogTrigger render={<Button className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl" />}>
-            <Plus size={16} className="mr-2" /> Nova Autoescola
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-background border-black/10 dark:border-white/10 rounded-3xl">
-            <DialogHeader>
-              <DialogTitle>Nova Autoescola</DialogTitle>
-              <DialogDescription>
-                Cadastre um novo cliente e defina a taxa de comissionamento.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="space-y-2">
-                <Label>Nome da Autoescola</Label>
-                <Input placeholder="Ex: CFC Direção Certa" className="bg-black/5 dark:bg-white/5 rounded-xl border-none" />
-              </div>
-              <div className="space-y-2">
-                <Label>CNPJ</Label>
-                <Input placeholder="00.000.000/0001-00" className="bg-black/5 dark:bg-white/5 rounded-xl border-none" />
-              </div>
-              <div className="space-y-2">
-                <Label>E-mail de Acesso (Login)</Label>
-                <Input type="email" placeholder="admin@cfcdirecaocerta.com.br" className="bg-black/5 dark:bg-white/5 rounded-xl border-none" />
-                <p className="text-[10px] text-muted-foreground mt-1">Uma senha provisória será enviada para este e-mail.</p>
-              </div>
-              <div className="space-y-2">
-                <Label>Taxa por Contrato (R$)</Label>
-                <Input type="number" placeholder="150" className="bg-black/5 dark:bg-white/5 rounded-xl border-none" />
-                <p className="text-[10px] text-muted-foreground mt-1">Sua agência receberá este valor por cada contrato fechado pela IA.</p>
-              </div>
-              <div className="space-y-2">
-                <Label>Token OpenAI (API Key)</Label>
-                <Input type="password" placeholder="sk-proj-..." className="bg-black/5 dark:bg-white/5 rounded-xl border-none font-mono text-xs" />
-                <p className="text-[10px] text-muted-foreground mt-1">Chave da OpenAI que será usada para processar as mensagens desta Autoescola.</p>
-              </div>
-            </div>
-            <DialogFooter>
-              <Button type="submit" className="w-full rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">Cadastrar Cliente</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <Link href="/admin/autoescolas/nova">
+          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-6">
+            <Plus size={18} className="mr-2" /> Nova Autoescola
+          </Button>
+        </Link>
 
       </div>
 
@@ -121,38 +85,11 @@ export default function AdminAutoescolasPage() {
                     {escola.criacao}
                   </td>
                   <td className="px-6 py-4 text-right flex justify-end gap-2">
-                    <Dialog>
-                      <DialogTrigger render={<Button variant="ghost" size="sm" onClick={() => setSelectedEscola(escola)} className="h-8 rounded-lg text-zinc-500 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5" />}>
+                    <Link href={`/admin/autoescolas/${escola.id}`}>
+                      <Button variant="ghost" size="sm" className="h-8 rounded-lg text-zinc-500 hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5">
                         <Settings size={14} className="mr-1.5" /> Editar
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px] bg-background border-black/10 dark:border-white/10 rounded-3xl text-left">
-                        <DialogHeader>
-                          <DialogTitle>Editar {selectedEscola.nome}</DialogTitle>
-                          <DialogDescription>
-                            Ajuste os dados e a taxa de comissionamento deste cliente.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                          <div className="space-y-2">
-                            <Label>Taxa por Contrato (R$)</Label>
-                            <Input type="number" defaultValue={selectedEscola.taxa} className="bg-black/5 dark:bg-white/5 rounded-xl border-none font-bold text-emerald-500" />
-                            <p className="text-[10px] text-muted-foreground mt-1">Este valor será multiplicado pelas matrículas geradas.</p>
-                          </div>
-                          <div className="space-y-2">
-                            <Label>E-mail de Acesso</Label>
-                            <Input type="email" defaultValue={`contato@${selectedEscola.id.replace('_', '')}.com.br`} className="bg-black/5 dark:bg-white/5 rounded-xl border-none" />
-                          </div>
-                          <div className="space-y-2">
-                            <Label>Token OpenAI (API Key)</Label>
-                            <Input type="password" defaultValue={`sk-proj-...${selectedEscola.id.slice(-4)}`} className="bg-black/5 dark:bg-white/5 rounded-xl border-none text-muted-foreground font-mono text-xs" />
-                            <p className="text-[10px] text-muted-foreground mt-1">Chave exclusiva para separar os custos de IA deste cliente.</p>
-                          </div>
-                        </div>
-                        <DialogFooter>
-                          <Button type="submit" className="w-full rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white">Salvar Alterações</Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+                      </Button>
+                    </Link>
 
                     <Link href={`/escola/${escola.id}`}>
                       <Button variant="ghost" size="sm" className="h-8 rounded-lg text-emerald-500 hover:text-emerald-600 hover:bg-emerald-500/10">

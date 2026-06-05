@@ -30,6 +30,11 @@ export interface User {
   ultimoAcesso?: string;
 }
 
+export interface LeadHistoricoEtapa {
+  status: StatusLead;
+  dataEntrada: string;
+}
+
 export interface Lead {
   id: string;
   tenantId: string;
@@ -41,6 +46,11 @@ export interface Lead {
   criadoEm: string;
   atualizadoEm: string;
   diasNoStatus?: number; // Para ajudar no UI
+  dataInicio?: string;
+  campanha?: string;
+  vendedor?: string;
+  whaticketUrl?: string;
+  historicoEtapas?: LeadHistoricoEtapa[];
 }
 
 export interface Message {
@@ -128,6 +138,8 @@ export interface PricingCategory {
   tenantId: string;
   categoria: CategoriaCNH;
   valor: number;
+  valorPromocional?: number;
+  emPromocao?: boolean;
   descricao: string;
   incluso: string[];
   prazoEstimado: string;

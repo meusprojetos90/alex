@@ -22,6 +22,7 @@ export default function ConfigLayout({
     { label: "Template Contrato", href: `${baseUrl}/contrato` },
     { label: "Formulário", href: `${baseUrl}/formulario` },
     { label: "Agente IA", href: `${baseUrl}/agente` },
+    { label: "WhatsApp", href: `${baseUrl}/whatsapp` },
     { label: "Integrações", href: `${baseUrl}/integracoes/fala-zap` },
     { label: "Usuários", href: `${baseUrl}/usuarios` },
   ];
